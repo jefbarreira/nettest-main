@@ -15,7 +15,7 @@ jobs:
     - name: Generate Version
       id: version
       shell: pwsh
-     run: |
+      run: |
         $baseVersion = $env:BASE_VERSION
         $runNumber = [int]"${{ github.run_number }}"
         $safeRunNumber = $runNumber % 65535
