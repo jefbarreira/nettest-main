@@ -1,0 +1,52 @@
+name: Build .NET App
+
+on:
+  schedule:
+    - cron: '17 21 * * *'  # 5 PM UTC (adjust timezone as needed)
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Generate Version
+      id: version
+      shell: pwsh
+      env:
+        BASE_VERSION: ${{ vars.BASE_VERSION }}
+      run: |
+        $baseVersion = $env:BASE_VERSION
+        $runNumber = [int]"${{ github.run_number }}"
+        $safeRunNumber = $runNumber % 65535
+        
+        $fileVersion = "$baseVersion.$safeRunNumber"
+        $productVersion = "$baseVersion.${{ github.run_number }}"
+        $shortSha = "${{ github.sha }}".Substring(0, 8)
+        
+        echo "FILE_VERSION=$fileVersion" >> $env:GITHUB_OUTPUT
+        echo "PRODUCT_VERSION=$productVersion" >> $env:GITHUB_OUTPUT
+        echo "SHORT_SHA=$shortSha" >> $env:GITHUB_OUTPUT
+        
+        Write-Host "File Version: $fileVersion"
+        Write-Host "Product Version: $productVersion"
+        Write-Host "Commit: $shortSha"
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+    
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build --configuration Release --no-restore /p:FileVersion="${{ steps.version.outputs.FILE_VERSION }}" /p:ProductVersion="${{ steps.version.outputs.PRODUCT_VERSION }}" /p:InformationalVersion="${{ steps.version.outputs.PRODUCT_VERSION }}-${{ steps.version.outputs.SHORT_SHA }}"
+    
+    - name: Run tests
+      run: dotnet test --configuration Release --no-build --verbosity normal
+    
+    - name: Publish
+      run: dotnet publish --configuration Release --no-build --output ./publish
