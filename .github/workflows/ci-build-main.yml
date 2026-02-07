@@ -10,7 +10,7 @@ jobs:
   build:    
     uses: jefbarreira/nettest-build/.github/workflows/ci-generic-build-net.yml@main
     with:
-      base-version: ${{ vars.BASE_VERSION }}
+      base-version: '20.7.0' # ${{ vars.BASE_VERSION }}
       runner: 'windows-net'
       repo: 'jefbarreira/nettest-main'
       solution: '.\WebApplication1.sln'
