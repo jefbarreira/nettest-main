@@ -7,6 +7,7 @@ on:
 
 jobs:
   build:
+    environment: Development
     uses: jefbarreira/nettest-build/.github/workflows/ci-generic-build-net.yml@main
     with:
       base-version: "${{ vars.BASE_VERSION }}"
