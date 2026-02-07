@@ -5,12 +5,16 @@ on:
     branches: [ main ]
   workflow_dispatch:
   workflow_call:
+    inputs:
+      base-version:
+        required: true
+        type: string
 
 jobs:
   build:    
     uses: jefbarreira/nettest-build/.github/workflows/ci-generic-build-net.yml@main
     with:
-      base-version: '20.7.0' # ${{ vars.BASE_VERSION }}
+      base-version: ${{ inputs.base-version }}"
       runner: 'windows-net'
       repo: 'jefbarreira/nettest-main'
       solution: '.\WebApplication1.sln'
