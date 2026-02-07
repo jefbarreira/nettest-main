@@ -6,8 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    environment: Development
+  build:    
     uses: jefbarreira/nettest-build/.github/workflows/ci-generic-build-net.yml@main
     with:
       base-version: ${{ vars.BASE_VERSION }}
