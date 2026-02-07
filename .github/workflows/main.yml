@@ -2,7 +2,7 @@ name: Build .NET App
 
 on:
   schedule:
-    - cron: '17 21 * * *'  # 5 PM UTC (adjust timezone as needed)
+    - cron: '00 17 * * *'  # 5 PM UTC (adjust timezone as needed)
   workflow_dispatch:
 
 jobs:
