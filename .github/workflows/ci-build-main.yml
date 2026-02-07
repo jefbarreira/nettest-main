@@ -12,4 +12,4 @@ jobs:
     with:
       base-version: ${{ vars.BASE_VERSION }}
       runner: 'windows-net'
-      repo: ${{ github.repository }}
+      repo: 'jefbarreira/nettest-main'
