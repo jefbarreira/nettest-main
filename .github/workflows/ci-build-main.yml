@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:    
-    uses: ../nettest-build/.github/workflows/ci-generic-build-net.yml@main
+    uses: jefbarreira/nettest-build/.github/workflows/ci-generic-build-net.yml@main
     with:
       base-version: ${{ vars.BASE_VERSION }}
       runner: 'windows-net'
