@@ -13,3 +13,4 @@ jobs:
       base-version: ${{ vars.BASE_VERSION }}
       runner: 'windows-net'
       repo: 'jefbarreira/nettest-main'
+      solution: '.\WebApplication1.sln'
