@@ -10,5 +10,5 @@ jobs:
     environment: Development
     uses: jefbarreira/nettest-build/.github/workflows/ci-generic-build-net.yml@main
     with:
-      base-version: "${{ vars.BASE_VERSION }}"
+      base-version: ${{ vars.BASE_VERSION }}
       runner: 'windows-net'
