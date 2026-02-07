@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    uses: nettest-build/.github/.github/workflows/dotnet-build.yml@main
+    uses: nettest-build/.github/workflows/dotnet-build.yml@main
     with:
       base-version: "${{ vars.BASE_VERSION }}"
       runner: 'windows-net'
